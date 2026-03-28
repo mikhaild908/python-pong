@@ -1,2 +1,2 @@
-# pythong-pong
+# python-pong
 Pong

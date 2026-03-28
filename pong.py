@@ -27,6 +27,8 @@ class Paddle:
         self.rect = pygame.Rect(x, y, PADDLE_WIDTH, PADDLE_HEIGHT)
 
     def move(self, dy: int) -> None:
+        if not isinstance(dy, int):
+            raise TypeError(f"dy must be an int, got {type(dy).__name__}")
         self.rect.y += dy
         # Clamp paddle inside the window
         self.rect.y = max(0, min(WINDOW_HEIGHT - PADDLE_HEIGHT, self.rect.y))

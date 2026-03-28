@@ -23,23 +23,23 @@ SCORE_FONT_SIZE = 48
 # --- Helper classes ---
 
 class Paddle:
-    def __init__(self, x, y):
+    def __init__(self, x: int, y: int) -> None:
         self.rect = pygame.Rect(x, y, PADDLE_WIDTH, PADDLE_HEIGHT)
 
-    def move(self, dy):
+    def move(self, dy: int) -> None:
         self.rect.y += dy
         # Clamp paddle inside the window
         self.rect.y = max(0, min(WINDOW_HEIGHT - PADDLE_HEIGHT, self.rect.y))
 
-    def draw(self, surface):
+    def draw(self, surface: pygame.Surface) -> None:
         pygame.draw.rect(surface, FOREGROUND_COLOR, self.rect)
 
 
 class Ball:
-    def __init__(self):
+    def __init__(self) -> None:
         self.reset()
 
-    def reset(self):
+    def reset(self) -> None:
         self.rect = pygame.Rect(
             WINDOW_WIDTH // 2 - BALL_SIZE // 2,
             WINDOW_HEIGHT // 2 - BALL_SIZE // 2,
@@ -53,7 +53,7 @@ class Ball:
             self.speed_x = -self.speed_x
         self.speed_y = BALL_INITIAL_SPEED_Y
 
-    def update(self):
+    def update(self) -> None:
         self.rect.x += self.speed_x
         self.rect.y += self.speed_y
 
@@ -65,18 +65,18 @@ class Ball:
             self.rect.bottom = WINDOW_HEIGHT
             self.speed_y = -abs(self.speed_y)
 
-    def bounce_off_paddle(self):
+    def bounce_off_paddle(self) -> None:
         self.speed_x = -self.speed_x
         # Slightly increase speed on each hit for escalating difficulty
         self.speed_x = int(self.speed_x * 1.05) or self.speed_x
 
-    def draw(self, surface):
+    def draw(self, surface: pygame.Surface) -> None:
         pygame.draw.rect(surface, FOREGROUND_COLOR, self.rect)
 
 
 # --- Main game logic ---
 
-def main():
+def main() -> None:
     pygame.init()
     screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
     pygame.display.set_caption("Pong")
